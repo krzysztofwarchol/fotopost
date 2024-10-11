@@ -1,0 +1,74 @@
+{% extends "layout2.html" %}
+
+{% load static %}
+
+{% block title %}
+    Edit profile | FOTOPOST
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'edit.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="user-box" style="margin-top: 6vh;">
+        <div>
+            <center>
+                <img src="{% static 'images_tmp/logo_icon.png' %}" height="45em" style="margin-bottom: 2vh;">
+                <h2>Edit Profile: @{{user.username}}</h2><br>
+            </center>
+        </div>
+
+        <form action="{% url 'editprofile' user.username %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 2vh;" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-row align-items-center">
+                <div class="col-sm-6 my-1">
+                    <input class="form-control inp fname" type="text" name="firstname" placeholder="New First Name " autocomplete="off" autofocus>
+                    <span class="star small"></span>
+                </div>
+                <div class="col-sm-6 my-1">
+                    <input class="form-control inp lname" type="text" name="lastname" placeholder="New Last Name " autocomplete="off">
+                    <span class="star small"></span>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp bio" type="text" name="bio" placeholder="New Bio [text]" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="New Password" autocomplete="off">
+                <span class="star small">{{message2}}</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp cpswd" type="password" name="confirmation" placeholder="Confirm New Password" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="profile" class="form-control custom-file-input" id="profile" accept="image/jpeg,image/png,image/webp,image/gif" data-focusable="true" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="profile"><span style="color: #6c757d;">Choose new profile picture</span></label>
+                    <span class="star small"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="cover" class="form-control custom-file-input" id="cover" accept="image/jpeg,image/png,image/webp,image/gif" data-focusable="true" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="cover"><span style="color: #6c757d;">Choose new background picture</span></label>
+                    <span class="star small"></span>
+                </div>
+            </div>
+
+
+            <center>
+                <input class="btn btn-primary" type="submit" value="Confirm" style="margin-top: 10px; width: 95%;" disabled>
+            </center>
+        </form>
+    
+        <div>
+            <center>
+                <a class="back-main" href="{% url 'profile' user.username %}">Back</a> to profile.
+            </center>
+        </div><br><br>
+    </div>
+{% endblock %}
